@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Kaisle/await-transaction-mined/issues"
   },
-  "homepage": "https://github.com/Kaisle/await-transaction-mined#readme"
+  "homepage": "https://github.com/Kaisle/await-transaction-mined#readme",
+  "dependencies": {
+    "web3": "^1.0.0-beta.34"
+  }
 }
