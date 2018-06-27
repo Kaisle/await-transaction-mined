@@ -1,6 +1,4 @@
-const Web3 = require("web3");
-
-function awaitTransactionMined(txnHash, interval) {
+function awaitTransactionMined(web3, txnHash, interval) {
     var transactionReceiptAsync;
     interval = interval ? interval : 500;
     transactionReceiptAsync = function(txnHash, resolve, reject) {
