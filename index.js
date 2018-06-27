@@ -1,4 +1,4 @@
-function awaitTransactionMined(web3, txnHash, interval) {
+function await(web3, txnHash, interval) {
     var transactionReceiptAsync;
     interval = interval ? interval : 500;
     transactionReceiptAsync = function(txnHash, resolve, reject) {
@@ -30,5 +30,5 @@ function awaitTransactionMined(web3, txnHash, interval) {
 };
 
 module.exports = {
-  awaitTransactionMined: awaitTransactionMined
+  await: await
 }
