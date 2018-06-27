@@ -1,0 +1,25 @@
+{
+  "name": "await-transaction-mined",
+  "version": "1.0.0",
+  "description": "Check whether your Ethereum transaction has been mined.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kaisle/await-transaction-mined.git"
+  },
+  "keywords": [
+    "Ethereum",
+    "transaction",
+    "mined",
+    "await"
+  ],
+  "author": "Kaisle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kaisle/await-transaction-mined/issues"
+  },
+  "homepage": "https://github.com/Kaisle/await-transaction-mined#readme"
+}
