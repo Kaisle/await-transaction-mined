@@ -18,7 +18,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io
 
 (async function() {
   var txHash = '0x6ee5d58c314d183f3ca70e2292b39dca5ae46141fe4e6b1da5b106dd506e589a';
-  const minedTxReceipt = await awaitTransactionMined.await(web3, txHash);
+  const minedTxReceipt = await awaitTransactionMined.awaitTx(web3, txHash);
 })();
 ```
 ```node
@@ -43,6 +43,20 @@ console.log(minedTxReceipt);
   transactionIndex: 56 }
 ```
 
+Ensure transaction has not ended up in an uncle block (waits for 12 block confirmations):
+
+```node
+const awaitTransactionMined = require ('await-transaction-mined');
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/'+<YOUR_INFURA_API_KEY>));
+const POLL_INTERVAL = 5000;
+
+(async function() {
+  var txHash = '0x6ee5d58c314d183f3ca70e2292b39dca5ae46141fe4e6b1da5b106dd506e589a';
+  const minedTxReceipt = await awaitTransactionMined.awaitTx(web3, txHash, {ensureNotUncle: true});
+})();
+```
+
 Custom poll interval:
 
 ```node
@@ -53,5 +67,5 @@ const POLL_INTERVAL = 5000;
 
 (async function() {
   var txHash = '0x6ee5d58c314d183f3ca70e2292b39dca5ae46141fe4e6b1da5b106dd506e589a';
-  const minedTxReceipt = await awaitTransactionMined.await(web3, txHash, POLL_INTERVAL);
+  const minedTxReceipt = await awaitTransactionMined.awaitTx(web3, txHash, {interval: POLL_INTERVAL});
 })();
