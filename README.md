@@ -43,7 +43,7 @@ console.log(minedTxReceipt);
   transactionIndex: 56 }
 ```
 
-Ensure transaction has not ended up in an uncle block (waits for 12 block confirmations):
+#### Ensure transaction has not ended up in an uncle block (waits for 12 block confirmations):
 
 ```node
 const awaitTransactionMined = require ('await-transaction-mined');
@@ -57,7 +57,7 @@ const POLL_INTERVAL = 5000;
 })();
 ```
 
-Custom poll interval:
+#### Custom poll interval:
 
 ```node
 const awaitTransactionMined = require ('await-transaction-mined');
