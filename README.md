@@ -3,6 +3,12 @@ Check whether an Ethereum transaction has been mined.
 
 Polls the blockchain every 500ms and returns a promise with the transaction receipt once mined.
 
+Installation:
+
+```node
+npm install await-transaction-mined --save
+```
+
 Example (using Infura and Ropsten):
 
 ```node
