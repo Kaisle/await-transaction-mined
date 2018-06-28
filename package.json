@@ -23,6 +23,5 @@
   },
   "homepage": "https://github.com/Kaisle/await-transaction-mined#readme",
   "dependencies": {
-    "web3": "^1.0.0-beta.34"
   }
 }
