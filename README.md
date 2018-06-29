@@ -3,6 +3,8 @@ Check whether an Ethereum transaction has been mined.
 
 Polls the blockchain every 500ms and returns a promise with the transaction receipt once mined.
 
+Can also ensure that the transaction is valid and final by waiting for 12 block confirmations once mined.
+
 ### Installation:
 
 ```node
@@ -43,7 +45,7 @@ console.log(minedTxReceipt);
   transactionIndex: 56 }
 ```
 
-#### Ensure transaction has not ended up in an uncle block (waits for 12 block confirmations):
+#### Ensure transaction is final and has not ended up in an uncle block (waits for 12 block confirmations):
 
 ```node
 const awaitTransactionMined = require ('await-transaction-mined');

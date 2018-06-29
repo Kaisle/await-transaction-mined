@@ -1,6 +1,6 @@
 {
   "name": "await-transaction-mined",
-  "version": "1.0.1",
+  "version": "1.0.9",
   "description": "Check whether your Ethereum transaction has been mined.",
   "main": "index.js",
   "scripts": {

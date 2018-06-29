@@ -1,26 +1,36 @@
 function awaitTx(web3, txnHash, options) {
     interval = options && options.interval ? options.interval : 500;
-    var transactionReceiptAsync = function(txnHash, resolve, reject) {
+    var transactionReceiptAsync = async function(txnHash, resolve, reject) {
         try {
             var receipt = web3.eth.getTransactionReceipt(txnHash);
-            if (receipt == null) {
+            if (!receipt) {
                 setTimeout(function () {
                     transactionReceiptAsync(txnHash, resolve, reject);
                 }, interval);
             } else {
               if (options && options.ensureNotUncle) {
-                receipt.then(async function(receipt){
-                  var block = await web3.eth.getBlock(receipt.blockNumber)
+                var resolvedReceipt = await receipt;
+                if (!resolvedReceipt || !resolvedReceipt.blockNumber) setTimeout(function () { transactionReceiptAsync(txnHash, resolve, reject);
+                }, interval);
+                else {
+                  try {
+                  var block = await web3.eth.getBlock(resolvedReceipt.blockNumber)
                   var current = await web3.eth.getBlock('latest');
                   if (current.number - block.number >= 12) {
                     var txn = await web3.eth.getTransaction(txnHash)
-                    if (txn.blockNumber != null) resolve(receipt);
+                    if (txn.blockNumber != null) resolve(resolvedReceipt);
                     else reject(new Error('Transaction with hash: ' + txnHash + ' ended up in an uncle block.'));
                   }
                   else setTimeout(function () {
                       transactionReceiptAsync(txnHash, resolve, reject);
                   }, interval);
-                });
+                  }
+                  catch (e) {
+                    setTimeout(function () {
+                        transactionReceiptAsync(txnHash, resolve, reject);
+                    }, interval);
+                  }
+                }
               }
               else resolve(receipt);
             }
