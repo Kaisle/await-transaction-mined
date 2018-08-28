@@ -1,5 +1,6 @@
 function awaitTx(web3, txnHash, options) {
     interval = options && options.interval ? options.interval : 500;
+    blocksToWait = options && options.blocksToWait ? options.blocksToWait : 12;
     var transactionReceiptAsync = async function(txnHash, resolve, reject) {
         try {
             var receipt = web3.eth.getTransactionReceipt(txnHash);
@@ -16,7 +17,7 @@ function awaitTx(web3, txnHash, options) {
                   try {
                   var block = await web3.eth.getBlock(resolvedReceipt.blockNumber)
                   var current = await web3.eth.getBlock('latest');
-                  if (current.number - block.number >= 12) {
+                  if (current.number - block.number >= blocksToWait) {
                     var txn = await web3.eth.getTransaction(txnHash)
                     if (txn.blockNumber != null) resolve(resolvedReceipt);
                     else reject(new Error('Transaction with hash: ' + txnHash + ' ended up in an uncle block.'));
