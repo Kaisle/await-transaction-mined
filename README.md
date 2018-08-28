@@ -71,3 +71,18 @@ const POLL_INTERVAL = 5000;
   var txHash = '0x6ee5d58c314d183f3ca70e2292b39dca5ae46141fe4e6b1da5b106dd506e589a';
   const minedTxReceipt = await awaitTransactionMined.awaitTx(web3, txHash, {interval: POLL_INTERVAL});
 })();
+```
+
+#### Custom blocks numbers confirmation number:
+
+```node
+const awaitTransactionMined = require ('await-transaction-mined');
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/'+<YOUR_INFURA_API_KEY>));
+const BLOCKS_NUMBER = 6;
+
+(async function() {
+  var txHash = '0x6ee5d58c314d183f3ca70e2292b39dca5ae46141fe4e6b1da5b106dd506e589a';
+  const minedTxReceipt = await awaitTransactionMined.awaitTx(web3, txHash, {blocksToWait: BLOCKS_NUMBER});
+})();
+```
