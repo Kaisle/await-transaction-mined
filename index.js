@@ -1,6 +1,10 @@
+const DEFAULT_INTERVAL = 500;
+const DEFAULT_BLOCKS_TO_WAIT = 0;
+
+
 function awaitTx(web3, txnHash, options) {
-    interval = options && options.interval ? options.interval : 500;
-    blocksToWait = options && options.blocksToWait ? options.blocksToWait : 12;
+    interval = options && options.interval ? options.interval : DEFAULT_INTERVAL;
+    blocksToWait = options && options.blocksToWait ? options.blocksToWait : DEFAULT_BLOCKS_TO_WAIT;
     var transactionReceiptAsync = async function(txnHash, resolve, reject) {
         try {
             var receipt = web3.eth.getTransactionReceipt(txnHash);
@@ -9,7 +13,7 @@ function awaitTx(web3, txnHash, options) {
                     transactionReceiptAsync(txnHash, resolve, reject);
                 }, interval);
             } else {
-              if (options && options.ensureNotUncle) {
+              if (blocksToWait > 0) {
                 var resolvedReceipt = await receipt;
                 if (!resolvedReceipt || !resolvedReceipt.blockNumber) setTimeout(function () { transactionReceiptAsync(txnHash, resolve, reject);
                 }, interval);
